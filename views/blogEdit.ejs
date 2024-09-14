@@ -1,0 +1,41 @@
+<% include partials/header %>
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Edit Blog:</h1>
+    <% if(errors != undefined && errors.length > 0){ %>
+    <div class="alert alert-danger">
+        <ul>
+            <% errors.forEach(function(error){ %>
+            <li><%= error.msg %></li>
+            <% }) %>
+        </ul>
+    </div>
+    <% } %>
+
+    <form method="POST" action="/blogs/edit/<%= blogs._id %>" class="mb-4">
+        <input type="hidden" name="_method" value="PUT" />
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" class="form-control" id="title" name="title" value="<%= blogs.title %>">
+        </div>
+        <div class="form-group">
+            <label for="slug">Slug:</label>
+            <input type="text" class="form-control" id="slug" name="slug" value="<%= blogs.slug %>">
+        </div>
+        <div class="form-group">
+            <label for="author">Author:</label>
+            <select class="form-control" id="author" name="author">
+                <option value="5bb26043708926e438db6cad" <%= blogs.author == "5bb26043708926e438db6cad" ? 'selected' : '' %>>Sai</option>
+                <option value="5bb26043708926e438db6cae" <%= blogs.author == "5bb26043708926e438db6cae" ? 'selected' : '' %>>Lohith</option>
+                <option value="5bb26043708926e438db6caf" <%= blogs.author == "5bb26043708926e438db6caf" ? 'selected' : '' %>>Kolli</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="body">Body:</label>
+            <input type="text" class="form-control" id="body" name="body" value="<%= blogs.body %>">
+        </div>
+        <button type="submit" class="btn btn-primary">Update Blog</button>
+    </form>
+</div>
+
+<% include partials/footer %>
